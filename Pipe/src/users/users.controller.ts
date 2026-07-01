@@ -1,4 +1,4 @@
-import { Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { retry } from "rxjs";
 
@@ -21,9 +21,8 @@ export class UsersController {
     }
 
     @Post()
-    createUser() {
-        const user1 = { id: 3, name: 'Ronaldo', age: 58, gender: 'Male', isMarried: false };
-        const usersService = new UsersService();
-        return usersService.createUser(user1);
-    }
+        createUser(@Body() user:any) {
+            this.usersService.createUser(user);
+            return 'A new user with id '+user.id+' has been created';
+        }
 }
