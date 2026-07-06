@@ -4,6 +4,8 @@ import { retry } from "rxjs";
 
 @Controller('users')
 export class UsersController {
+
+    //http://localhost:3000/user?gender=Female
     @Get()
     getUsers(@Query() query:any) {
         const usersService = new UsersService();

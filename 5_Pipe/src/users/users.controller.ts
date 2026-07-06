@@ -10,10 +10,11 @@ export class UsersController {
     //http://localhost:3000/users?limit=30&page=3
     @Get()
     getUsers(@Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit:number, 
-             @Query('page',new DefaultValuePipe(3), ParseIntPipe) page:number) {
+             @Query('page',new DefaultValuePipe(3), ParseIntPipe) page:number) 
+             {
                 console.log(limit,page);
                 return this.usersService.getAllUsers();
-    }
+              }
 
     @Get(':id')
     getUserByID(@Param('id', ParseIntPipe) id: number) {
