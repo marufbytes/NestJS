@@ -1,6 +1,7 @@
-import { ValidationPipe, Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
+import { ValidationPipe, Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Patch, ParseBoolPipe } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { createUserDto } from "./dtos/create-user.dto";
+import { GetuserPramDto } from "./dtos/get-user-param.dto";
 
 @Controller('users')
 export class UsersController {
@@ -8,10 +9,13 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {};
 
     //http://localhost:3000/users?limit=30&page=3
-    @Get()
+    @Get(':isMarried')
     getUsers(@Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit:number, 
-             @Query('page',new DefaultValuePipe(3), ParseIntPipe) page:number) {
-                console.log(limit,page);
+             @Query('page',new DefaultValuePipe(3), ParseIntPipe) page:number,
+             @Param() param:GetuserPramDto
+            ) 
+            {
+                console.log(param);
                 return this.usersService.getAllUsers();
     }
 
@@ -26,4 +30,6 @@ export class UsersController {
         
         return 'A new use has been created';
     }
+
+   
 }
