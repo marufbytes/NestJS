@@ -1,6 +1,5 @@
 import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { retry } from "rxjs";
 
 @Controller('users')
 export class UsersController {

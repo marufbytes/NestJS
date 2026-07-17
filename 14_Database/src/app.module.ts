@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
 
 @Module({
+  
   imports: [UsersModule, TweetModule, AuthModule,TypeOrmModule.forRootAsync({
     imports:[],
     inject:[],
@@ -20,16 +21,8 @@ import { User } from './users/user.entity';
     username:'postgres',
     password: '1234',
     database: 'nestjs'
-    })
-    // type:'postgres',   ----> Synchronous connection
-    // entities:[],
-    // synchronize:true,
-    // host:'localhost',
-    // port: 5432,
-    // username:'postgres',
-    // password: '1234',
-    // database: 'nestjs'
-  })],
+    })})],
+
   controllers: [AppController],
   providers: [AppService],
 })

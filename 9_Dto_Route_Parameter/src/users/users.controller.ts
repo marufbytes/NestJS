@@ -1,4 +1,4 @@
-import { ValidationPipe, Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Patch, ParseBoolPipe } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query, Patch, ParseBoolPipe } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { createUserDto } from "./dtos/create-user.dto";
 import { GetuserPramDto } from "./dtos/get-user-param.dto";
