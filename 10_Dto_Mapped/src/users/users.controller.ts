@@ -9,7 +9,6 @@ export class UsersController {
     
     constructor(private readonly usersService: UsersService) {};
 
-    //http://localhost:3000/users?limit=30&page=3
     @Get(':isMarried')
     getUsers(@Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit:number, 
              @Query('page',new DefaultValuePipe(3), ParseIntPipe) page:number,
