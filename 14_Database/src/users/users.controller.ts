@@ -10,7 +10,7 @@ export class UsersController {
     constructor(private usersService:UsersService){};
 
     //http://localhost:3000/users?limit=30&page=3
-    @Get(':isMarried')
+    @Get()
     getUsers() 
         {
             return this.usersService.getAllUsers();
@@ -19,9 +19,7 @@ export class UsersController {
     @Post()
     createUser(@Body() user: createUserDto) {
         this.usersService.createUser(user);
-    }
-
-    
+    }   
 
    
 }

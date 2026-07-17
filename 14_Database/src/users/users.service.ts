@@ -12,8 +12,8 @@ export class UsersService {
         private userRepository: Repository<User>
     ) { }
 
-    async getAllUsers() {
-        return await this.userRepository.find();
+    getAllUsers() {
+        return this.userRepository.find();
     }
 
     public async createUser(userDto: createUserDto) {
