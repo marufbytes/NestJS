@@ -12,6 +12,10 @@ export class ProfileService {
         ){}
 
     public getProfiles(){
-        return this.profileRepository.find();
+        return this.profileRepository.find({
+            relations:{
+                user:true
+            }
+        });
     }
 }

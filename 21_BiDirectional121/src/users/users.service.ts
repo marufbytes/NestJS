@@ -1,4 +1,4 @@
-import { Injectable, ConflictException } from "@nestjs/common"; // Added ConflictException
+import { Injectable, ConflictException, NotFoundException, BadRequestException } from "@nestjs/common"; // Added ConflictException
 import { Repository } from "typeorm";
 import { User } from "./user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
@@ -15,16 +15,6 @@ export class UsersService {
         @InjectRepository(Profile)
         private profileRepository: Repository<Profile>
     ) { }
-
-
-    // 1 way=======>
-    // getAllUsers() {
-    //     return this.userRepository.find({
-    //         relations:{               //--->Fetch the profile details also
-    //             profile:true,
-    //         }
-    //     });
-    // }
     
     getAllUsers() {
         return this.userRepository.find({
@@ -35,18 +25,25 @@ export class UsersService {
     }
 
     public async createUser(userDto: createUserDto) {
-       //create a profile & save
        userDto.profile= userDto.profile?? {}
-  
 
-       //create a user object
-       let user = this.userRepository.create(userDto);
+       let user = this.userRepository.create(userDto);;
 
-
-       //set the profile
-    //    user.profile=profile;
-
-       //save the user object
        return await this.userRepository.save(user);
     }
+
+    public async deleteUser(id:number){
+        let user = await this.userRepository.findOne({where:{id}, relations: { profile: true }});
+
+        if (!user) throw new NotFoundException();
+
+        if (user.profile && user.profile.id) {
+            await this.profileRepository.delete(user.profile.id);
+        }
+
+        await this.userRepository.delete(id);
+
+        return {deleted: true}
+    }
+
 }

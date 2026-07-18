@@ -30,9 +30,9 @@ export class User{
     })
     password:string;
 
-    @OneToOne(()=>Profile,{         //cascade here
+    @OneToOne(()=>Profile,(profile)=>profile.user,{         //cascade here
         cascade:['insert'],
-        eager:true               //2nd eagar loading option
+        
     })
     @JoinColumn()
     profile?:Profile;
